@@ -1,11 +1,6 @@
-// ==============================================================================
-// DEPENDENCIES
-// Series of npm packages that we will use to give our server useful functionality
-// ==============================================================================
-
 var express = require("express");
 
-// ==============================================================================
+// Express use for localhost number
 var app = express();
 
 var PORT = process.env.PORT || 3006;
@@ -14,6 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
+app.use(express.static("public"));
 require("./routes/apiRoute")(app);
 require("./routes/htmlRoute")(app);
 
