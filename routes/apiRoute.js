@@ -1,9 +1,11 @@
-var noteData = require("../db/db.json");
-var fs = require("fs");
+const noteData = require("../db/db.json");
+const fs = require("fs");
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile);
 
 module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
-    res.json(noteData);
+    return res.json(noteData);
   });
 
   app.post("/api/notes", function(req, res) {
@@ -23,6 +25,10 @@ module.exports = function(app) {
       }
     }
       noteData.splice(loc, 1);
-      fs.writeFileSync("../db/db.json", "public", JSON.stringify(noteData));
+      writeFileAsync("../Develop/db/db.json", JSON.stringify(noteData))
+      .catch(function(err) {
+        console.log(err);
+      });
+      res.json(noteData);
   });
 };
