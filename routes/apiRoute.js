@@ -1,8 +1,9 @@
 var noteData = require("../db/db");
+var fs = require("fs");
 
 module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
-    res.json(noteData);
+    return res.json(noteData);
   });
 
   app.post("/api/notes", function(req, res) {
@@ -13,6 +14,8 @@ module.exports = function(app) {
   });
 
   app.delete("/api/notes/:id", function(req, res) {
-    res.json({ ok: true });
+    var id = req.body;
+
+    res.send(id);
   });
 };
