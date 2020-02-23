@@ -14,8 +14,6 @@ module.exports = function(app) {
   });
 
   app.delete("/api/notes/:id", function(req, res) {
-    var id = req.body;
-
-    res.send(id);
+    res.send(noteData);
   });
 };
