@@ -3,11 +3,13 @@ const fs = require("fs");
 const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile);
 
+//Retrieve notes that were posted
 module.exports = function(app) {
   app.get("/api/notes", function(req, res) {
     return res.json(noteData);
   });
 
+  //Posts saved notes
   app.post("/api/notes", function(req, res) {
     var newNote = req.body;
 
@@ -15,6 +17,7 @@ module.exports = function(app) {
     res.json(noteData);
   });
 
+  //Deletes selected saved note that has an id
   app.delete('/api/notes/:id', function (req, res) {
     var loc = 0;
 
